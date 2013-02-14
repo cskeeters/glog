@@ -18,7 +18,7 @@ or if on a shared computer:
 
     $ python setup.py install --home=~
 
-This will install rst2pdf with it's dependencies which include 
+This will install rst2pdf with its dependencies which include:
 
  * pdfrw 0.1
  * reportlab 2.6
