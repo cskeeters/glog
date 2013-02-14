@@ -1,0 +1,61 @@
+embeddedFonts : []
+    [ PTN57F.ttf, PTN77F.ttf, PTN57F.ttf, PTN77F.ttf ]
+    [ PTS55F.ttf, PTS75F.ttf, PTS56F.ttf, PTS76F.ttf ]
+
+fontsAlias : 
+  stdFont: PTS55F
+  stdBold: PTS75F
+  stdItalic: PTS56F
+  stdBoldItalic: PTS76F
+  stdSans: PTS55F
+  stdSansBold: PTS75F
+  stdSansBoldItalic: PTS76F
+  stdSansItalic: PTS56F
+  stdMono: DejaVu Sans Mono
+  stdMonoBold: DejaVu Sans Mono-Bold
+  stdMonoBoldItalic: DejaVu Sans Mono-BoldOblique
+  stdMonoItalic: DejaVu Sans Mono-Oblique
+  stdSerif: DejaVu Serif
+
+pageSetup :
+  size: letter
+  margin-top: 2cm
+  margin-bottom: 2cm
+  margin-left: 2cm
+  margin-right: 2cm
+  margin-gutter: 0cm
+  firstTemplate: oneColumn
+
+pageTemplates:
+  oneColumn:
+    frames: []
+        [0%, 0%, 100%, 100%]
+    showHeader : false
+    showFooter : true
+    defaultFooter : ###Page###
+    defaultHeader : ###Section###
+
+styles: 
+  normal :
+    fontSize: 10
+
+  title :
+    fontName: PTN77F
+    spaceBefore: 0
+    spaceAfter: 20
+
+  heading1:
+    fontName: PTN77F
+    fontSize: 200%
+    underline: true
+    spaceBefore: 20
+    spaceAfter: -10
+  
+  heading2:
+    fontName: PTN57F
+
+  heading3:
+    fontName: PTN57F
+
+  bullet-list:
+    spaceAfter:10
