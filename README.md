@@ -10,11 +10,11 @@ rst2pdf -s ptsans,letter,friendly glog.txt
 
 ### Installing Dependencies
 
-Download rst2pdf from google code and run.
+[Download rst2pdf](https://code.google.com/p/rst2pdf/downloads/list) from google code and run:
 
     $ python setup.py install
 
-or 
+or if on a shared computer:
 
     $ python setup.py install --home=~
 
