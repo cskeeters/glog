@@ -12,9 +12,9 @@ Logging in C++ with google logging library
 ABSTRACT
 ========
 
-This document describes the facilities in `google logging library`_ that could be used for a c++ project.
+This document describes the facilities in the `google logging library`_ that may be used for a C++ project.
 
-Using a logging library can assist developers with debugging code and help maintenance personnel with troubleshooting systemic problems.  Often c++ developers use ``printf`` or ``cout`` statements to check for proper code flow and to debug issues, but then they have to be removed later.  Many logging facilities support *logging levels* that enable logging at a specified level or above without re-compilation.
+Using a logging library can assist developers with debugging code and help maintenance personnel with troubleshooting systemic problems.  C++ developers often use ``printf`` or ``cout`` statements to check for proper code flow and to debug issues, but these statements must later be removed and can become tedious to manage or adjust over time.  Many logging facilities feature helpful *logging levels* that allow the user to control logging at a specified level or above, all without the need for re-compilation.
 
 Source Code Example
 ===================
@@ -49,33 +49,33 @@ Source Code Example
 Logging Types
 =============
 
-Logging is divided into two types, each with levels.  The logs with INFO, WARNING, ERROR, and FATAL should be useful for administrators and users.
+Logging is divided into two types, each with levels.  Generally, the most useful logs for administrators and users are those with INFO, WARNING, ERROR, and FATAL levels. 
 
-*Verbose Logging* should be made useful developers and maintainers tracking the programs flow through algorithms.
+*Verbose Logging* allows users the ability to control how detailed the log messages are, which can be useful for developers and maintainers tracking the programs flow through algorithms.
 
 Output
 ======
 
-If you call ``google::InitGoogleLogging(argv[0])``, the logs go to stderr and the log file in ``/tmp/``.  Otherwise, logging will only go to stderr.
+Calling ``google::InitGoogleLogging(argv[0])`` inside your program will set logs to output to stderr and separately to a log file in a ``/tmp/`` directory.  Otherwise, logging will only be sent to stderr.
 
-The name of the program (passed in ``argv[0]``) is used in the file name of the log files that are created in ``/tmp/``.  Unless otherwise specified, glog writes to the filename::
+The name of the program (passed in ``argv[0]``) is used as a part of the file name of the log files that are created in ``/tmp/``.  Unless otherwise specified, glog writes to the filename::
 
   /tmp/<program name>.<hostname>.<user name>.log.<severity level>.<date>.<time>.<pid>
   (e.g., "/tmp/hello_world.server.chad.log.INFO.20080709-222411.10474")
 
-In addition to these log files, symbolic links are created to make it easier to see the last longs.  It would be named ``/tmp/hello_world.INFO`` for the example above.
+In addition to these log files, symbolic links are also generated that make it easier for the user to see the most recently generated logs.  In the above example, the symbolic link would be named ``/tmp/hello_world.INFO``.
 
 
 Configuring
 ===========
 
-What gets logged can be configured by:
+There are a number of ways in which the logging settings may be configured.  Logging settings can be configured by either:
 
-* Flags set in the source code (uncomment lines in the example above)
-* Command line arguments provided to the application that set the flags in the example above.  (See `google flags`_)
-* Environment variables set before the program starts
+* Setting flags inside the source code (see the commented lines in the previous source code example)
+* Providing command line arguments to the application that will set the flags  (See `google flags`_)
+* Setting environment variables before the program starts
 
-Most `flags`_ documented as a command line parameter can be used as a ``FLAGS_`` program variable or as a ``GLOG_`` environment variable.
+Most `flags`_ documented as a command line parameter can alternatively be used as a ``FLAGS_`` program variable or as a ``GLOG_`` environment variable.
 
 .. NOTE::
   The command line arguments don't work out of the box without google flags, or some other command line argument processor.
@@ -83,7 +83,7 @@ Most `flags`_ documented as a command line parameter can be used as a ``FLAGS_``
 Standard Output
 ---------------
 
-By default, ``ERROR``, and ``FATAL``, are print to stderr in addition to being output to the logfile.  To change this default level, the ``FLAGS_stderrthreshold`` variable can be set to 0 for ``INFO``, 1 for ``WARNING``, 2 for ``ERROR``,  and 3 for ``FATAL``.  The ``GLOG_stderrthreshold``  environment variable can be used the same way as shown in the example below.
+By default, logs with level ``ERROR`` and ``FATAL`` will print to stderr in addition to being output to the logfile.  This default level may be changed by setting the ``FLAGS_stderrthreshold`` variable either to 0 for ``INFO``, 1 for ``WARNING``, 2 for ``ERROR``,  or 3 for ``FATAL``.  The ``GLOG_stderrthreshold`` environment variable can be used the same way as demonstrated in the following example:
 
 .. code-block:: bash
 
@@ -93,13 +93,13 @@ By default, ``ERROR``, and ``FATAL``, are print to stderr in addition to being o
 Log Levels
 ----------
 
-An administrator may decide that they don't want to clutter the files with INFO level logs.  To change the logging leve, run the program with the environment variable ``GLOG_minloglevel`` set to 0 for ``INFO``, 1 for ``WARNING``, 2 for ``ERROR``,  and 3 for ``FATAL``.  Since it's a minimum, setting it to 1 for ``WARNING`` would include ``ERROR`` and ``FATAL``, but exclude ``INFO``.
+An administrator may decide that they don't want to clutter their files with too many INFO level logs.  This can be adjusted by changing the logging levels.  To change the logging level, run the program with different values for the environment variable ``GLOG_minloglevel`` set to 0 for ``INFO``, 1 for ``WARNING``, 2 for ``ERROR``,  and 3 for ``FATAL``.  Since it's a minimum, setting it to 1 for ``WARNING`` would include ``ERROR`` and ``FATAL``, but exclude ``INFO``.
 
 .. code-block:: bash
 
   GLOG_minloglevel=1 ./hello_world
 
-If the FLAGS_minloglevel flag is uncommented, it will set a default that can be overridden by a argument or environment variable.
+Looking again at the source code example at the beginning of this document, if the line with the FLAGS_minloglevel flag is uncommented a default will be set that can be overridden by an argument or environment variable.
 
 Verbose Log Levels
 ------------------
@@ -110,15 +110,15 @@ Verbose logging can be enabled globally via the ``FLAGS_v`` flag or the ``GLOG_v
 
   GLOG_vmodule=processor=2 GLOG_v=1 ./hello_world
 
-This will enable any ``VLOG(2)`` statements in ``processor.h`` or ``processor.cpp``.
+The above example enables any ``VLOG(2)`` statements in ``processor.h`` or ``processor.cpp``.
 
 
 Installation
 ============
 
-The library and development header can be downloaded on `google code`_.
+The google logging library and development header can be downloaded on `google code`_.
 
-Read the INSTALL file for details, but this should work
+Please read the INSTALL file for details. The following command should work to install:
 
 .. code-block:: bash
 
@@ -131,7 +131,7 @@ Read the INSTALL file for details, but this should work
 Compiling your programs
 =======================
 
-When you link your program you must pass the ``-lglog`` flag.  You also use this::
+When linking your program you must pass the ``-lglog`` flag.  You also use the following::
 
   pkg-config --libs libglog
 
@@ -141,4 +141,5 @@ When you link your program you must pass the ``-lglog`` flag.  You also use this
 .. _`google logging library`: http://google-glog.googlecode.com/
 .. _`google logging library documentation`: http://google-glog.googlecode.com/svn/trunk/doc/glog.html
 .. _`google flags`: http://code.google.com/p/gflags/
+
 
