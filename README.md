@@ -1,6 +1,6 @@
 # Google Logging Documentation
 
-This repository contains [the documentation](https://bitbucket.org/cskeeters/glog/src/tip/glog.pdf) created by Chad Skeeters and edited by Jerry Garcia for NCI Information systems on [google logging library](https://code.google.com/p/google-glog/).
+This repository contains [the documentation](https://bitbucket.org/cskeeters/glog/src/tip/glog.pdf) created by Chad Skeeters and edited by Jerry Garcia for [NCI Information systems](http://nciinc.com) on [google logging library](https://code.google.com/p/google-glog/).
 
 This pdf file was generated from the glog.txt file in this source code repository.  The document is written in [reStructuredText](http://docutils.sourceforge.net/rst.html) and uses [rst2pdf](http://rst2pdf.ralsina.com.ar/) to process that markup into PDF.
 
