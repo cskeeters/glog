@@ -19,44 +19,54 @@ Using a logging library can assist developers with debugging code and help maint
 Source Code Example
 ===================
 
+The following example shows how the library is used.
+
 .. code-block:: c++
 
   #include <glog/logging.h>
 
   int main(int argc, char *argv[])
   {
+    // Flags can control which logs are output.
+    // Many flags can be changed after InitGoogleLogging has been called
+
     //FLAGS_stderrthreshold=google::INFO;
     //FLAGS_logtostderr = 1; // disabled logging to a file.
     //FLAGS_minloglevel = google::WARNING; // the default is INFO
     //FLAGS_v = 2;
     google::InitGoogleLogging(argv[0]);
 
-    LOG(INFO) << "Something is happening.";
-    LOG(WARNING) << "Warning something might not be setup right.";
+    // Unlike cout, log statements don't require std::endl
+    LOG(FATAL) << "Program is dying because...";
     LOG(ERROR) << "Error has occurred, but trying to continue";
-    LOG(FATAL) << "Program is dieing because...";
+    LOG(WARNING) << "Warning something might not be set up right.";
+    LOG(INFO) << "Something is happening.";
 
+    // Verbose Logging for tracing execution
     VLOG(1) << "Something is happening";
     VLOG(2) << "Something detailed is happening";
     VLOG(3) << "Something very detailed is happening";
+
   }
 
 .. * vim syntax fix
 
-.. NOTE::
-  no ``std::endl`` required.
+General Process
+===============
+
+When a logging statement is executed in the program, the level of the log (``FATAL``, ``ERROR``, ...) specified in the statement is checked against a minimum logging level that is configured in the library to see if the statement should be ignored.  If unfiltered, the string will get output to stderr or a log file, or both.
 
 Logging Types
 =============
 
-Logging is divided into two types, each with levels.  Generally, the most useful logs for administrators and users are those with INFO, WARNING, ERROR, and FATAL levels. 
+Generally, the most useful logs for administrators and users are those with INFO, WARNING, ERROR, and FATAL levels. 
 
-*Verbose Logging* allows users the ability to control how detailed the log messages are, which can be useful for developers and maintainers tracking the programs flow through algorithms.
+*Verbose Logging* are logs issued with the ``VLOG`` keyword.  Developers and Maintainers may find the *Verbose Logging*  capabilities useful for tracking program execution.  Levels for verbose logging are numbers (instead of predefined words) starting with level 1.  Larger numbers trigger all of the verbose logging with a level number less than or equal to the level specified.
 
 Output
 ======
 
-Calling ``google::InitGoogleLogging(argv[0])`` inside your program will set logs to output to stderr and separately to a log file in a ``/tmp/`` directory.  Otherwise, logging will only be sent to stderr.
+Calling ``google::InitGoogleLogging(argv[0])`` inside your program will enable log output to a file in the ``/tmp/`` directory.  This does not prevent the logs from being output on ``stderr`` as well.
 
 The name of the program (passed in ``argv[0]``) is used as a part of the file name of the log files that are created in ``/tmp/``.  Unless otherwise specified, glog writes to the filename::
 
@@ -75,7 +85,7 @@ There are a number of ways in which the logging settings may be configured.  Log
 * Providing command line arguments to the application that will set the flags  (See `google flags`_)
 * Setting environment variables before the program starts
 
-Most `flags`_ documented as a command line parameter can alternatively be used as a ``FLAGS_`` program variable or as a ``GLOG_`` environment variable.
+Most `flags`_ documented as a command line parameter can alternatively be used as a program variable (with the prefix ``FLAGS_``) or as an environment variable (with the prefix ``GLOG_``).
 
 .. NOTE::
   The command line arguments don't work out of the box without google flags, or some other command line argument processor.
@@ -99,7 +109,7 @@ An administrator may decide that they don't want to clutter their files with too
 
   GLOG_minloglevel=1 ./hello_world
 
-Looking again at the source code example at the beginning of this document, if the line with the FLAGS_minloglevel flag is uncommented a default will be set that can be overridden by an argument or environment variable.
+Looking again at the source code example at the beginning of this document, if the line with the FLAGS_minloglevel flag is uncommented, a default will be set that can be overridden by an argument or environment variable.
 
 Verbose Log Levels
 ------------------
@@ -116,7 +126,7 @@ The above example enables any ``VLOG(2)`` statements in ``processor.h`` or ``pro
 Installation
 ============
 
-The google logging library and development header can be downloaded on `google code`_.
+The google logging library and development header can be downloaded on the `google code`_ website.
 
 Please read the INSTALL file for details. The following command should work to install:
 
@@ -131,7 +141,7 @@ Please read the INSTALL file for details. The following command should work to i
 Compiling your programs
 =======================
 
-When linking your program you must pass the ``-lglog`` flag.  You also use the following::
+When linking your program you must pass the ``-lglog`` flag.  You can alternatively use the following::
 
   pkg-config --libs libglog
 
