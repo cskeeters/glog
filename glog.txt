@@ -1,11 +1,11 @@
 .. rst2html --stylesheet=style.css glog.txt > glog.html && o glog.html
-.. rst2pdf -s letter,friendly glog.txt && o glog.pdf
+.. rst2pdf -s ptsans,letter,friendly glog.txt && o glog.pdf
 
 ==========================================
 Logging in C++ with google logging library
 ==========================================
 :Info: See http://google-glog.googlecode.com
-:Author: Chad Skeeters
+:Author: Chad Skeeters, Jerry Garcia
 :Date: 13-Feb-2013
 :Description: This document outlines the use of google logging library
 
