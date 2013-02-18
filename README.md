@@ -8,15 +8,27 @@ This pdf file was generated from the glog.txt file in this source code repositor
 
 rst2pdf -s ptsans,letter,friendly glog.txt
 
-### Installing Dependencies
+## Installing Dependencies
+
+rst2pdf and it's dependencies are all python libraries.  There are different ways to install these libraries on your system.
+
+### easy_install
+
+If [setuptools](http://pypi.python.org/pypi/setuptools) is installed, it will install everything you need.
+
+    $ sudo easy_instal rst2pdf
+
+### Pip
+
+If [pip](http://pypi.python.org/pypi/pip/) is installed, it will install everything you need.
+
+    $ sudo pip install rst2pdf
+
+### Manually
 
 [Download rst2pdf](https://code.google.com/p/rst2pdf/downloads/list) from google code and run:
 
     $ python setup.py install
-
-or if on a shared computer:
-
-    $ python setup.py install --home=~
 
 This will install rst2pdf with its dependencies which include:
 
