@@ -152,4 +152,10 @@ When linking your program you must pass the ``-lglog`` flag.  You can alternativ
 .. _`google logging library documentation`: http://google-glog.googlecode.com/svn/trunk/doc/glog.html
 .. _`google flags`: http://code.google.com/p/gflags/
 
+More Information
+================
 
+More information can be found with in `the documentation that comes with the library`_.
+
+
+.. _`the documentation that comes with the library`: https://google-glog.googlecode.com/svn/trunk/doc/glog.html
